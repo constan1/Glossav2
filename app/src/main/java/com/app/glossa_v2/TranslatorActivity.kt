@@ -44,11 +44,7 @@ class TranslatorActivity : AppCompatActivity() , AdapterView.OnItemSelectedListe
         targetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         targetSpinner.adapter = targetAdapter
         targetSpinner.onItemSelectedListener = this
-
-
-        val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.BOTTOM_TOP, ButtonColors
-        )
+        
 
         findViewById<Button>(R.id.voiceButton).setOnClickListener {
             if (trigger1) {
