@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Glossa-v2</string>
+    <string-array name="languages">
+        <item>Spanish</item>
+        <item>Bulgarian</item>
+        <item>Czech</item>
+        <item>German</item>
+        <item>French</item>
+        <item>Croation</item>
+        <item>Hungarian</item>
+        <item>Dutch</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Romanian</item>
+        <item>Swedish</item>
+
+    </string-array>
+</resources>

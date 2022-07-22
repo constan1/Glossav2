@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="@color/grey"
+    tools:context=".TranslatorActivity">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+
+            <Button
+                android:id="@+id/voiceButton"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/white"
+                android:backgroundTint="@null"
+                android:elevation="1dp"
+                android:text="voice"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/cardView3"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintStart_toStartOf="@+id/cardView3"
+                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+            <Button
+                android:id="@+id/readItToMeButton"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/white"
+                android:backgroundTint="@null"
+                android:elevation="1dp"
+                android:text="Read It To Me"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/voiceButton"
+                app:layout_constraintHorizontal_bias="0.421"
+                app:layout_constraintStart_toStartOf="@+id/voiceButton"
+                app:layout_constraintTop_toBottomOf="@+id/voiceButton" />
+
+            <Button
+                android:id="@+id/cameraButton"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/white"
+                android:backgroundTint="@null"
+                android:elevation="1dp"
+                android:text="Camera"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/galleryButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/galleryButton"
+                app:layout_constraintTop_toBottomOf="@+id/galleryButton" />
+
+            <Button
+                android:id="@+id/galleryButton"
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/white"
+                android:backgroundTint="@null"
+                android:elevation="1dp"
+                android:text="Gallery"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/readItToMeButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/readItToMeButton"
+                app:layout_constraintTop_toBottomOf="@+id/readItToMeButton" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="395dp"
+                android:layout_height="337dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="112dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    tools:layout_editor_absoluteX="7dp"
+                    tools:layout_editor_absoluteY="64dp">
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="96dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/sourceLanguageSpinner"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginTop="36dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <Spinner
+                        android:id="@+id/targetLanguageSpinner"
+                        android:layout_width="120dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="80dp"
+                        app:layout_constraintStart_toEndOf="@+id/sourceLanguageSpinner"
+                        app:layout_constraintTop_toTopOf="@+id/sourceLanguageSpinner"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clipBoardTextView"
+                        android:layout_width="393dp"
+                        android:layout_height="238dp"
+                        android:layout_marginBottom="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="348dp"
+                            android:layout_height="21dp"
+                            android:layout_marginStart="34dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="11dp"
+                            android:text="This is a temp text.."
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/toClipBoard"
+                            android:layout_width="35dp"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="160dp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView9"
+                            app:layout_constraintHorizontal_bias="0.984"
+                            app:layout_constraintStart_toStartOf="@+id/textView9"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9"
+                            app:srcCompat="@drawable/clipboards" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
