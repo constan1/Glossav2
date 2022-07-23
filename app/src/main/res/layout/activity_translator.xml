@@ -2,26 +2,80 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textToBeTranslated"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@color/grey"
+    android:background="@color/grey"
     tools:context=".TranslatorActivity">
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
 
-        >
+        android:fillViewport="true">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent">
 
-            >
 
+            <Button
+                android:id="@+id/translateButton"
+                android:layout_width="329dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="458dp"
+                android:background="@drawable/button_border"
+                android:backgroundTint="@null"
+                android:text="Translate"
+                android:textColor="@color/main"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
+                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
+                app:layout_constraintTop_toBottomOf="@+id/translatedTextCardView" />
+
+            <TextView
+                android:id="@+id/textToBeTranslatedBox"
+                android:layout_width="match_parent"
+                android:layout_height="201dp"
+                android:layout_marginTop="240dp"
+                android:text="text to be translated..."
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
+                app:layout_constraintTop_toBottomOf="@+id/translatedTextCardView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/glossaCardView"
+                android:layout_width="match_parent"
+                android:layout_height="179dp"
+                android:background="@color/main"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/main"
+                app:cardCornerRadius="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:id="@+id/glossaTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:gravity="center"
+                    android:text="Glossa"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/voiceButton"
@@ -101,7 +155,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
-                android:layout_width="395dp"
+                android:layout_width="match_parent"
                 android:layout_height="337dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="112dp"
@@ -119,6 +173,16 @@
                     tools:layout_editor_absoluteX="7dp"
                     tools:layout_editor_absoluteY="64dp">
 
+                    <ImageView
+                        android:id="@+id/toClipBoard"
+                        android:layout_width="35dp"
+                        android:layout_height="28dp"
+                        android:layout_marginTop="200dp"
+                        app:layout_constraintEnd_toEndOf="@+id/divider2"
+                        app:layout_constraintStart_toStartOf="@+id/divider2"
+                        app:layout_constraintTop_toTopOf="@+id/translatedTextLayour_view1"
+                        app:srcCompat="@drawable/clipboards" />
+
                     <View
                         android:id="@+id/divider2"
                         android:layout_width="match_parent"
@@ -134,60 +198,122 @@
                         android:id="@+id/sourceLanguageSpinner"
                         android:layout_width="130dp"
                         android:layout_height="48dp"
-                        android:layout_marginStart="36dp"
-                        android:layout_marginTop="36dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/divider2"
+                        app:layout_constraintHorizontal_bias="0.054"
+                        app:layout_constraintStart_toStartOf="@+id/divider2"
+                        app:layout_constraintTop_toTopOf="@+id/targetLanguageSpinner"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <Spinner
                         android:id="@+id/targetLanguageSpinner"
                         android:layout_width="120dp"
                         android:layout_height="48dp"
-                        android:layout_marginStart="80dp"
-                        app:layout_constraintStart_toEndOf="@+id/sourceLanguageSpinner"
-                        app:layout_constraintTop_toTopOf="@+id/sourceLanguageSpinner"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintEnd_toEndOf="@+id/divider2"
+                        app:layout_constraintHorizontal_bias="0.913"
+                        app:layout_constraintStart_toStartOf="@+id/divider2"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="SpeakableTextPresentCheck" />
 
+
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/clipBoardTextView"
-                        android:layout_width="393dp"
-                        android:layout_height="238dp"
-                        android:layout_marginBottom="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/translatedTextLayour_view1"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="164dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider2">
+                        app:layout_constraintStart_toStartOf="@+id/divider2"
+                        app:layout_constraintTop_toTopOf="@+id/divider2">
 
-                        <TextView
-                            android:id="@+id/textView9"
-                            android:layout_width="348dp"
-                            android:layout_height="21dp"
-                            android:layout_marginStart="34dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="11dp"
-                            android:text="This is a temp text.."
+
+                        <androidx.core.widget.NestedScrollView
+                            android:id="@+id/clipBoardTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:fillViewport="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:id="@+id/toClipBoard"
-                            android:layout_width="35dp"
-                            android:layout_height="28dp"
-                            android:layout_marginTop="160dp"
-                            app:layout_constraintEnd_toEndOf="@+id/textView9"
-                            app:layout_constraintHorizontal_bias="0.984"
-                            app:layout_constraintStart_toStartOf="@+id/textView9"
-                            app:layout_constraintTop_toBottomOf="@+id/textView9"
-                            app:srcCompat="@drawable/clipboards" />
+                            <TextView
+                                android:id="@+id/translatedTextbox_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="This is a temp text.."
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.725"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.433" />
+                        </androidx.core.widget.NestedScrollView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="387dp"
+                android:layout_height="208dp"
+                android:layout_marginTop="40dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
+                app:layout_constraintTop_toBottomOf="@+id/glossaCardView">
+
+                <ImageView
+                    android:id="@+id/loaded_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_broken_image" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/translatedTextCardView"
+                android:layout_width="336dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-25dp"
+                android:visibility="gone"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="25dp"
+                app:layout_constraintEnd_toEndOf="@+id/glossaCardView"
+                app:layout_constraintStart_toStartOf="@+id/glossaCardView"
+                app:layout_constraintTop_toBottomOf="@+id/glossaCardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Spinner
+                        android:id="@+id/sourceLanguageSpinner_2"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="85dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/targetLanguageSpinner_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <Spinner
+                        android:id="@+id/targetLanguageSpinner_2"
+                        android:layout_width="120dp"
+                        android:layout_height="48dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

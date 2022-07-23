@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.49375" />
+        <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/background_color_main.xml" value="0.2444078947368421" />
+        <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/button_border.xml" value="0.20625" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.49375" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.49375" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_microphone_clicked.xml" value="0.49375" />

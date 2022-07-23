@@ -1,50 +1,44 @@
 package com.app.glossa_v2
 
 import android.R.attr
-import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
-import androidx.cardview.widget.CardView
-import android.graphics.drawable.GradientDrawable
-import android.R.attr.button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
+import com.app.glossa_v2.helpers.spinnerPartner
+import com.google.android.material.snackbar.Snackbar
+import android.R.attr.label
+
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 
 
-class TranslatorActivity : AppCompatActivity() , AdapterView.OnItemSelectedListener{
+class TranslatorActivity : AppCompatActivity(){
+
+
+
+    private lateinit var spinnerPartner: spinnerPartner
 
     var trigger1 :Boolean = true
-    val ButtonColors = intArrayOf(Color.parseColor("#04c5fd"), Color.parseColor("#a9e9fb"))
+    var clipboardCopy : Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_translator)
 
+        val clipboard: ClipboardManager =
+            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
+
+        spinnerPartner= spinnerPartner()
 
         val sourceSpinner: Spinner = findViewById(R.id.sourceLanguageSpinner)
-        val sourceAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
-            this,
-            R.array.languages,
-            android.R.layout.simple_spinner_item
-        )
-        sourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sourceSpinner.adapter = sourceAdapter
-        sourceSpinner.onItemSelectedListener = this
-
-
         val targetSpinner: Spinner = findViewById(R.id.targetLanguageSpinner)
-        val targetAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
-            this,
-            R.array.languages,
-            android.R.layout.simple_spinner_item
-        )
-        targetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        targetSpinner.adapter = targetAdapter
-        targetSpinner.onItemSelectedListener = this
-        
+
+        spinnerPartner.initiateSpinners(this,sourceSpinner,targetSpinner)
+
 
         findViewById<Button>(R.id.voiceButton).setOnClickListener {
             if (trigger1) {
@@ -57,25 +51,22 @@ class TranslatorActivity : AppCompatActivity() , AdapterView.OnItemSelectedListe
 
         }
         findViewById<ImageView>(R.id.toClipBoard).setOnClickListener {
-            findViewById<ConstraintLayout>(R.id.clipBoardTextView).setBackgroundColor(Color.LTGRAY)
+
+            if(clipboardCopy) {
+
+
+                findViewById<ConstraintLayout>(R.id.translatedTextLayour_view1).setBackgroundResource(R.drawable.background_color_main)
+                clipboardCopy = !clipboardCopy
+                val clip = ClipData.newPlainText("copied Text", findViewById<TextView>(R.id.translatedTextbox_view).text)
+                clipboard.setPrimaryClip(clip)
+
+                Snackbar.make(findViewById(R.id.textToBeTranslated),"Copied To Clipboard!",Snackbar.LENGTH_LONG).show()
+            }
+            else {
+                findViewById<ConstraintLayout>(R.id.translatedTextLayour_view1).setBackgroundColor(Color.WHITE)
+                clipboardCopy = !clipboardCopy
+            }
         }
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-        val text = parent!!.getItemAtPosition(position).toString();
-
-        val result = when(text){
-            "English" -> "en"
-            "Spanish" -> "es"
-            "Bulgarian" -> "bg"
-            else -> "other"
-        }
-
-        Toast.makeText(this,result,Toast.LENGTH_LONG).show();
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
 }
