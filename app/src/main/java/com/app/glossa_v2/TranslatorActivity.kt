@@ -15,6 +15,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,6 +25,10 @@ import java.lang.Exception
 
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream
 import java.util.jar.Manifest
+import android.widget.AdapterView
+
+
+
 
 
 class TranslatorActivity : AppCompatActivity(){
@@ -32,8 +37,10 @@ class TranslatorActivity : AppCompatActivity(){
 
     private lateinit var spinnerPartner: spinnerPartner
 
-    var trigger1 :Boolean = true
     var clipboardCopy : Boolean = true
+
+    var sourceLanguage : String = "English"
+    var targetLanguage : String = "Spanish"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +58,58 @@ class TranslatorActivity : AppCompatActivity(){
         spinnerPartner.initiateSpinners(this,sourceSpinner,targetSpinner)
 
 
+        sourceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                    val selected: String? =
+                        java.lang.String.valueOf(sourceSpinner.adapter.getItem(position))
+
+                    if (selected != null) {
+                        sourceLanguage = selected
+                    }
+
+
+            }
+
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        targetSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+
+                    val selected: String? =
+                        java.lang.String.valueOf(targetSpinner.adapter.getItem(position))
+                    if (selected != null) {
+                        targetLanguage = selected
+                    }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+
+
         findViewById<Button>(R.id.voiceButton).setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
                 // Requesting the permission
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.RECORD_AUDIO), MicrophoneHelper.REQUEST_PERMISSION)
             } else {
-                val alert = recordingDialog()
-                alert.showResetPasswordDialog(this)
+                val alert = recordingDialog(this)
+                alert.showDialog(sourceLanguage, targetLanguage)
             }
 
 

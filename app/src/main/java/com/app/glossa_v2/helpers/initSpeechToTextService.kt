@@ -7,12 +7,12 @@ import com.ibm.cloud.sdk.core.security.Authenticator
 import com.ibm.cloud.sdk.core.security.IamAuthenticator
 import com.ibm.watson.speech_to_text.v1.SpeechToText
 
-class initSpeechToTextService() {
+class initSpeechToTextService {
 
     companion object {
 
 
-        fun initSpeechToText(context: Context): SpeechToText {
+        fun initSpeechToText(context: Context): SpeechToText? {
             val authenticator: Authenticator =
                 IamAuthenticator(context.getString(R.string.speech_text_apikey))
             val service = SpeechToText(authenticator)

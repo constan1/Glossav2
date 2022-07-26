@@ -12,7 +12,7 @@ class SpeechToText_ {
 
     companion object{
         fun setUp(activity: Activity) : SpeechToText{
-            return initSpeechToTextService.initSpeechToText(activity)
+            return initSpeechToTextService.initSpeechToText(activity)!!
         }
 
         fun startInputStream(activity: Activity, input: TextView, capture: MicrophoneInputStream, speechService: SpeechToText){
