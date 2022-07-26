@@ -14,6 +14,16 @@ import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.pm.PackageManager
+import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.app.glossa_v2.helpers.recordingDialog
+import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper
+import java.lang.Exception
+
+import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream
+import java.util.jar.Manifest
 
 
 class TranslatorActivity : AppCompatActivity(){
@@ -24,6 +34,7 @@ class TranslatorActivity : AppCompatActivity(){
 
     var trigger1 :Boolean = true
     var clipboardCopy : Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_translator)
@@ -41,13 +52,16 @@ class TranslatorActivity : AppCompatActivity(){
 
 
         findViewById<Button>(R.id.voiceButton).setOnClickListener {
-            if (trigger1) {
-                findViewById<Button>(R.id.voiceButton).setBackgroundResource(R.drawable.voice_color)
-                trigger1 = !trigger1
-            } else if (!trigger1) {
-                findViewById<Button>(R.id.voiceButton).setBackgroundResource(R.drawable.voice_color2)
-                trigger1 = !trigger1
+
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
+                // Requesting the permission
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.RECORD_AUDIO), MicrophoneHelper.REQUEST_PERMISSION)
+            } else {
+                val alert = recordingDialog()
+                alert.showResetPasswordDialog(this)
             }
+
+
 
         }
         findViewById<ImageView>(R.id.toClipBoard).setOnClickListener {
@@ -68,5 +82,7 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
     }
+
+
 
 }
