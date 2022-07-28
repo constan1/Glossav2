@@ -1,34 +1,29 @@
 package com.app.glossa_v2
 
-import android.R.attr
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.NestedScrollView
 import com.app.glossa_v2.helpers.spinnerPartner
 import com.google.android.material.snackbar.Snackbar
-import android.R.attr.label
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.app.glossa_v2.helpers.recordingDialog
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper
-import java.lang.Exception
 
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream
-import java.util.jar.Manifest
 import android.widget.AdapterView
-
-
-
+import androidx.core.view.isVisible
+import com.airbnb.lottie.LottieAnimationView
+import com.app.glossa_v2.helpers.SpeechToText_
+import com.app.glossa_v2.helpers.textWatcher
+import com.ibm.watson.speech_to_text.v1.SpeechToText
 
 
 class TranslatorActivity : AppCompatActivity(){
@@ -37,11 +32,33 @@ class TranslatorActivity : AppCompatActivity(){
 
     private lateinit var spinnerPartner: spinnerPartner
 
-    var clipboardCopy : Boolean = true
+    private var clipboardCopy : Boolean = true
 
     var sourceLanguage : String = "English"
     var targetLanguage : String = "Spanish"
 
+    private lateinit var  microphoneHelper: MicrophoneHelper
+    private lateinit var capture: MicrophoneInputStream
+    private lateinit var speechService: SpeechToText
+
+
+    override fun onPause() {
+        super.onPause()
+        SpeechToText_.stopInputStream(microphoneHelper)
+
+
+            findViewById<Button>(R.id.voiceButton).isEnabled = true
+            findViewById<Button>(R.id.voiceButton).setBackgroundResource(R.color.white)
+            findViewById<Button>(R.id.voiceButton).text = "Voice"
+            SpeechToText_.stopInputStream(microphoneHelper)
+            findViewById<LottieAnimationView>(R.id.animation).isVisible = false
+            findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+            findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
+            findViewById<Button>(R.id.voiceButton).isEnabled = true
+
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_translator)
@@ -51,6 +68,8 @@ class TranslatorActivity : AppCompatActivity(){
 
 
         spinnerPartner= spinnerPartner()
+
+        microphoneHelper = MicrophoneHelper(this)
 
         val sourceSpinner: Spinner = findViewById(R.id.sourceLanguageSpinner)
         val targetSpinner: Spinner = findViewById(R.id.targetLanguageSpinner)
@@ -107,14 +126,41 @@ class TranslatorActivity : AppCompatActivity(){
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
                 // Requesting the permission
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.RECORD_AUDIO), MicrophoneHelper.REQUEST_PERMISSION)
+
+
             } else {
-                val alert = recordingDialog(this)
-                alert.showDialog(sourceLanguage, targetLanguage)
+                findViewById<LottieAnimationView>(R.id.animation).isVisible = true
+                findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.red)
+                findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
+
+
+                it.isEnabled = false
+                it.setBackgroundResource(R.color.grey)
+                findViewById<Button>(R.id.voiceButton).text = ""
+                microphoneHelper = MicrophoneHelper(this)
+                capture = microphoneHelper.getInputStream(true)
+                speechService = SpeechToText_.setUp(this)
+                SpeechToText_.startInputStream(this,findViewById(R.id.translatedTextbox_view),capture,speechService)
+                Snackbar.make(findViewById(R.id.textToBeTranslated),"Recording In Progress!",Snackbar.LENGTH_LONG).show()
             }
 
 
+        }
+
+        findViewById<Button>(R.id.translateAndStopButton).setOnClickListener {
+            findViewById<Button>(R.id.voiceButton).isEnabled = true
+            findViewById<Button>(R.id.voiceButton).setBackgroundResource(R.color.white)
+            findViewById<Button>(R.id.voiceButton).text = "Voice"
+            SpeechToText_.stopInputStream(microphoneHelper)
+            findViewById<LottieAnimationView>(R.id.animation).isVisible = false
+            findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+            findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
+            findViewById<Button>(R.id.voiceButton).isEnabled = true
+            //translate here.
 
         }
+
+
         findViewById<ImageView>(R.id.toClipBoard).setOnClickListener {
 
             if(clipboardCopy) {
@@ -132,6 +178,10 @@ class TranslatorActivity : AppCompatActivity(){
                 clipboardCopy = !clipboardCopy
             }
         }
+        findViewById<TextView>(R.id.translatedTextbox_view).addTextChangedListener(object:
+        textWatcher(){
+
+        })
     }
 
 
