@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Glossa-v2</string>
     <string-array name="languages">
+        <item>English</item>
         <item>Bosnian</item>
         <item>Czech</item>
         <item>German</item>
-        <item>English</item>
         <item>Spanish</item>
         <item>French</item>
         <item>Nederlands</item>

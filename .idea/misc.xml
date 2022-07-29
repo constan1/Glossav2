@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/button_border.xml" value="0.20625" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/gallery_button_layout.xml" value="0.17993421052631578" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.49375" />
+        <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_close.xml" value="0.23585526315789473" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.49375" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_microphone_clicked.xml" value="0.49375" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/drawable/ic_microphone_main.xml" value="0.49375" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/layout/activity_translator.xml" value="0.33" />
         <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/layout/custom_dialog.xml" value="0.2" />
+        <entry key="..\:/Users/Andrei/AndroidStudioProjects/Glossav2/app/src/main/res/layout/custom_progress_layout.xml" value="0.2256578947368421" />
       </map>
     </option>
   </component>

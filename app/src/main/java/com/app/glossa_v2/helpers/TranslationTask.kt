@@ -1,5 +1,6 @@
 package com.app.glossa_v2.helpers
 
+import android.app.Dialog
 import android.content.Context
 import android.os.AsyncTask
 import android.widget.TextView
@@ -11,7 +12,7 @@ import com.ibm.watson.language_translator.v3.model.TranslationResult
 import com.ibm.watson.language_translator.v3.util.Language
 import java.lang.ref.WeakReference
 
-class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetLanguage:String) :
+class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetLanguage:String, dialog: Dialog) :
     AsyncTask<String?, Void?, String>() {
 
 
@@ -22,15 +23,17 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
     private var targetLanguage_ = targetLanguage
 
     private var translatedText : String = String()
+
+    private var progressDialog = dialog
     override fun onPreExecute() {
 
 
         when(srcLanguage_){
 
+            "English"-> Language.ENGLISH
             "Bosnian" -> Language.BOSNIAN
             "Czech" -> Language.CZECH
             "German" -> Language.GERMAN
-            "English"-> Language.ENGLISH
             "Spanish" -> Language.SPANISH
             "French" -> Language.FRENCH
             "Dutch" -> Language.DUTCH
@@ -59,7 +62,10 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
             ?.let { initTranslationService.initLanguageTranslatorService(it) }!!
     }
 
-    override fun doInBackground(vararg params: String?): String? {
+    override fun doInBackground(vararg params: String?): String {
+        //Instantiate loading
+
+         ShowTranslation.showProgress(progressDialog,weakContext.get()!!)
         val translateOptions = TranslateOptions.Builder()
             .addText(params[0])
             .source(srcLanguage_)
@@ -75,6 +81,7 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
 
     override fun onPostExecute(result: String?) {
        ShowTranslation.showTranslation(translatedText,weakContext.get()!!.findViewById(R.id.translatedTextbox_view),weakContext.get()!!)
+        progressDialog.let { ShowTranslation.hideProgress(it,weakContext.get()!!) }
     }
 }
 
