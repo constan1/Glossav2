@@ -27,16 +27,14 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
     private var progressDialog = dialog
     override fun onPreExecute() {
 
-
         when(srcLanguage_){
 
             "English"-> Language.ENGLISH
-            "Bosnian" -> Language.BOSNIAN
+            "Dutch" -> Language.DUTCH
             "Czech" -> Language.CZECH
             "German" -> Language.GERMAN
             "Spanish" -> Language.SPANISH
             "French" -> Language.FRENCH
-            "Dutch" -> Language.DUTCH
             "Polish" -> Language.POLISH
             "Portugues" -> Language.PORTUGUESE
             "Romanian" -> Language.ROMANIAN

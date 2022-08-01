@@ -12,7 +12,7 @@ class initSpeechToTextService {
     companion object {
 
 
-        fun initSpeechToText(context: Context): SpeechToText? {
+        fun initSpeechToText(context: Context): SpeechToText {
             val authenticator: Authenticator =
                 IamAuthenticator(context.getString(R.string.speech_text_apikey))
             val service = SpeechToText(authenticator)

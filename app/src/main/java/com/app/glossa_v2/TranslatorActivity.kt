@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.app.glossa_v2.helpers.spinnerPartner
 import com.google.android.material.snackbar.Snackbar
 
 import android.content.ClipData
@@ -22,10 +21,10 @@ import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStrea
 import android.widget.AdapterView
 import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
-import com.app.glossa_v2.helpers.SpeechToText_
-import com.app.glossa_v2.helpers.TranslationTask
-import com.app.glossa_v2.helpers.textWatcher
+import com.app.glossa_v2.helpers.*
+import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer
 import com.ibm.watson.speech_to_text.v1.SpeechToText
+import com.ibm.watson.text_to_speech.v1.TextToSpeech
 import org.w3c.dom.Text
 
 
@@ -40,14 +39,18 @@ class TranslatorActivity : AppCompatActivity(){
     var sourceLanguage : String = "English"
     var targetLanguage : String = "Spanish"
     private var loading : Dialog? = null
+    private var speakerDialog: Dialog? = null
     private lateinit var  microphoneHelper: MicrophoneHelper
     private lateinit var capture: MicrophoneInputStream
     private lateinit var speechService: SpeechToText
 
+    private lateinit var textService: TextToSpeech
+
+    private val player = StreamPlayer()
+
     override fun onPause() {
         super.onPause()
         SpeechToText_.stopInputStream(microphoneHelper)
-
             findViewById<Button>(R.id.voiceButton).isEnabled = true
             findViewById<Button>(R.id.voiceButton).setBackgroundResource(R.color.white)
             findViewById<Button>(R.id.voiceButton).text = "Voice"
@@ -68,6 +71,7 @@ class TranslatorActivity : AppCompatActivity(){
             getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
         loading = Dialog(this)
+        speakerDialog = Dialog(this)
 
         spinnerPartner= spinnerPartner()
         microphoneHelper = MicrophoneHelper(this)
@@ -171,7 +175,6 @@ class TranslatorActivity : AppCompatActivity(){
             findViewById<LottieAnimationView>(R.id.animation).isVisible = false
             findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
             findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
-            findViewById<Button>(R.id.voiceButton).isEnabled = true
             findViewById<ImageView>(R.id.close).visibility = View.GONE
 
         }
@@ -194,6 +197,15 @@ class TranslatorActivity : AppCompatActivity(){
                 clipboardCopy = !clipboardCopy
             }
         }
+
+        findViewById<Button>(R.id.readItToMeButton).setOnClickListener {
+            textService = initTextToSpeechService.initTextToSpeech(this)
+            SynthesisTask(this,targetLanguage,player,textService,speakerDialog!!).execute(findViewById<TextView>(R.id.translatedTextbox_view).text.toString())
+
+        }
+
+
+
         findViewById<TextView>(R.id.translatedTextbox_view).addTextChangedListener(object:
         textWatcher(){
 

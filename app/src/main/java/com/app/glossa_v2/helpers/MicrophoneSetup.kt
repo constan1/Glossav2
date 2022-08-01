@@ -25,10 +25,7 @@ class MicrophoneSetup(activity: TranslatorActivity,inputText:TextView): BaseReco
 
     private fun showMicText(text: String) {
 
-        activity_.runOnUiThread {   /*
-        As text changes it will appear in a dialog
-        **/
-            //sho
+        activity_.runOnUiThread {
             input_.text = text
         }
     }
