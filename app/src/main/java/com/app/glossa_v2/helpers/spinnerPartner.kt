@@ -21,7 +21,7 @@ class spinnerPartner: serviceClass{
 
         val sourceAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             activity,
-            R.array.languages,
+            R.array.languages_spinner1,
             android.R.layout.simple_spinner_item
         )
 
@@ -31,7 +31,7 @@ class spinnerPartner: serviceClass{
 
         val targetAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             activity,
-            R.array.languages,
+            R.array.languages_spinner2,
             android.R.layout.simple_spinner_item
         )
         targetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

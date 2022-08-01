@@ -28,7 +28,6 @@ class SynthesisTask(activity: TranslatorActivity, targetLanguage: String, player
 
 
     override fun onPreExecute() {
-        ShowSpeech(weakContext.get()!!,dialog_).showReadBackUI()
       result =  when(targetLanguage_){
             "English" -> SynthesizeOptions.Voice.EN_US_LISAV3VOICE
             "French" -> SynthesizeOptions.Voice.FR_FR_NICOLASV3VOICE
@@ -48,6 +47,7 @@ class SynthesisTask(activity: TranslatorActivity, targetLanguage: String, player
 
             return "Not Synthesized"
         } else {
+            ShowSpeech(weakContext.get()!!,dialog_).showReadBackUI()
             val synthesizeOptions = SynthesizeOptions.Builder()
                 .text(params[0])
                 .voice(result)

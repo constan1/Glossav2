@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isVisible
 import com.app.glossa_v2.R
+import com.google.android.material.snackbar.Snackbar
 import org.w3c.dom.Text
 
 class ShowTranslation {
@@ -36,6 +37,17 @@ class ShowTranslation {
         fun hideProgress(loading: Dialog, activity: Activity){
             activity.runOnUiThread {
                 loading.let { if(it.isShowing)it.cancel() }
+            }
+        }
+
+        fun showTranslationError(activity: Activity){
+            activity.runOnUiThread {
+                val dialog : Dialog = Dialog(activity)
+                dialog.setContentView(R.layout.custom_error_translation_dialog)
+                dialog.setCancelable(true)
+                dialog.setCanceledOnTouchOutside(true)
+                dialog.show()
+
             }
         }
     }

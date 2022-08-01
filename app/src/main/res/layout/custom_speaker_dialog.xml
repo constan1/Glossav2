@@ -20,6 +20,4 @@
         app:lottie_fileName="speaker.json"
         app:lottie_loop="true" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,11 @@ class webSocketOptions {
 
 
     companion object {
-        fun getRecognizeOptions(captureStream: InputStream): RecognizeWithWebsocketsOptions? {
+        fun getRecognizeOptions(captureStream: InputStream,model:String): RecognizeWithWebsocketsOptions? {
             return RecognizeWithWebsocketsOptions.Builder()
                 .audio(captureStream)
                 .contentType(ContentType.OPUS.toString())
-                .model(RecognizeOptions.Model.EN_US_BROADBANDMODEL)
+                .model(model)
                 .interimResults(true)
                 .inactivityTimeout(-1)
                 .build()
