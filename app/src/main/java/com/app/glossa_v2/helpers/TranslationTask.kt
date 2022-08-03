@@ -1,16 +1,13 @@
 package com.app.glossa_v2.helpers
 
 import android.app.Dialog
-import android.content.Context
 import android.os.AsyncTask
-import android.widget.TextView
 import com.app.glossa_v2.R
 import com.app.glossa_v2.TranslatorActivity
 import com.ibm.watson.language_translator.v3.LanguageTranslator
 import com.ibm.watson.language_translator.v3.model.TranslateOptions
 import com.ibm.watson.language_translator.v3.model.TranslationResult
 import com.ibm.watson.language_translator.v3.util.Language
-import org.apache.commons.codec.language.bm.Lang
 import java.lang.ref.WeakReference
 
 class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetLanguage:String, dialog: Dialog) :
@@ -114,7 +111,7 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
 
             ShowTranslation.showTranslation(
                 translatedText,
-                weakContext.get()!!.findViewById(R.id.translatedTextbox_view),
+                weakContext.get()!!.findViewById(R.id.translatedTextView),
                 weakContext.get()!!
             )
             progressDialog.let { ShowTranslation.hideProgress(it, weakContext.get()!!) }

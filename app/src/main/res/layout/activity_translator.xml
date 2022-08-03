@@ -2,395 +2,324 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textToBeTranslated"
+    android:id="@+id/textToBeTranslatedView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
     tools:context=".TranslatorActivity">
 
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:fillViewport="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/glossaCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="179dp"
+            android:background="@color/main"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/main"
+            app:cardCornerRadius="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <ImageView
-                android:id="@+id/ocrImage"
-                android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <Button
-                android:id="@+id/translateButton"
-                android:layout_width="329dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="458dp"
-                android:background="@color/white"
-                android:backgroundTint="@null"
-                android:text="Translate"
-                android:textColor="@color/main"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
-                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
-                app:layout_constraintTop_toBottomOf="@+id/translatedTextCardView" />
 
             <TextView
-                android:id="@+id/textToBeTranslatedBox"
+                android:id="@+id/glossaTitle"
                 android:layout_width="match_parent"
-                android:layout_height="201dp"
-                android:layout_marginTop="240dp"
-                android:text="text to be translated..."
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
-                app:layout_constraintHorizontal_bias="0.444"
-                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
-                app:layout_constraintTop_toBottomOf="@+id/translatedTextCardView" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/glossaCardView"
-                android:layout_width="match_parent"
-                android:layout_height="179dp"
-                android:background="@color/main"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/main"
-                app:cardCornerRadius="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <TextView
-                    android:id="@+id/glossaTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
-                    android:gravity="center"
-                    android:text="Glossa"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/voiceButton"
-                android:layout_width="match_parent"
-                android:layout_height="103dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="2dp"
-                android:background="@color/white"
-                android:backgroundTint="@null"
-                android:elevation="1dp"
-                android:text="voice"
-                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:gravity="center"
+                android:text="Glossa"
+                android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@+id/cardView3"
-                app:layout_constraintHorizontal_bias="0.125"
-                app:layout_constraintStart_toStartOf="@+id/cardView3"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-            <Button
-                android:id="@+id/readItToMeButton"
-                android:layout_width="match_parent"
-                android:layout_height="103dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="2dp"
-                android:background="@color/white"
-                android:backgroundTint="@null"
-                android:elevation="1dp"
-                android:text="Read It To Me"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@+id/voiceButton"
-                app:layout_constraintHorizontal_bias="0.421"
-                app:layout_constraintStart_toStartOf="@+id/voiceButton"
-                app:layout_constraintTop_toBottomOf="@+id/voiceButton" />
-
-            <Button
-                android:id="@+id/cameraButton"
-                android:layout_width="match_parent"
-                android:layout_height="103dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="2dp"
-                android:background="@color/white"
-                android:backgroundTint="@null"
-                android:elevation="1dp"
-                android:text="Camera"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@+id/galleryButton"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/galleryButton"
-                app:layout_constraintTop_toBottomOf="@+id/galleryButton" />
-
-            <Button
-                android:id="@+id/galleryButton"
-                android:layout_width="match_parent"
-                android:layout_height="103dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="2dp"
-                android:background="@color/white"
-                android:backgroundTint="@null"
-                android:elevation="1dp"
-                android:text="Gallery"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@+id/readItToMeButton"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/readItToMeButton"
-                app:layout_constraintTop_toBottomOf="@+id/readItToMeButton" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="match_parent"
-                android:layout_height="394dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="90dp"
-                android:layout_marginEnd="10dp"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    tools:layout_editor_absoluteX="7dp"
-                    tools:layout_editor_absoluteY="64dp">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/speakerAnimation"
-                        android:layout_width="168dp"
-                        android:layout_height="59dp"
-                        android:layout_marginBottom="1dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
-                        app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
-                        app:lottie_autoPlay="true"
-                        app:lottie_fileName="speaker.json"
-                        app:lottie_loop="true" />
-
-                    <Button
-                        android:id="@+id/translateAndStopButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="74dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/grey"
-                        android:enabled="false"
-                        android:text="Translate"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/toClipBoard"
-                        app:layout_constraintVertical_bias="1.0"
-                        tools:layout_editor_absoluteX="0dp" />
-
-                    <ImageView
-                        android:id="@+id/toClipBoard"
-                        android:layout_width="35dp"
-                        android:layout_height="28dp"
-                        app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintHorizontal_bias="0.956"
-                        app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
-                        app:srcCompat="@drawable/clipboards" />
-
-                    <View
-                        android:id="@+id/divider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="96dp"
-                        android:background="?android:attr/listDivider"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Spinner
-                        android:id="@+id/sourceLanguageSpinner"
-                        android:layout_width="130dp"
-                        android:layout_height="48dp"
-                        app:layout_constraintEnd_toEndOf="@+id/divider2"
-                        app:layout_constraintHorizontal_bias="0.054"
-                        app:layout_constraintStart_toStartOf="@+id/divider2"
-                        app:layout_constraintTop_toTopOf="@+id/targetLanguageSpinner"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                    <Spinner
-                        android:id="@+id/targetLanguageSpinner"
-                        android:layout_width="120dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="24dp"
-                        app:layout_constraintEnd_toEndOf="@+id/divider2"
-                        app:layout_constraintHorizontal_bias="0.913"
-                        app:layout_constraintStart_toStartOf="@+id/divider2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/translatedTextLayour_view1"
-                        android:layout_width="match_parent"
-
-                        android:layout_height="164dp"
-                        android:layout_marginTop="24dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/sourceLanguageSpinner">
-
-
-                        <androidx.core.widget.NestedScrollView
-                            android:id="@+id/clipBoardTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:fillViewport="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0">
-
-                            <TextView
-                                android:id="@+id/translatedTextbox_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:text="This is a temp text.."
-                                android:textColor="@color/main"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.725"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.433" />
-                        </androidx.core.widget.NestedScrollView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animation"
-                        android:layout_width="85dp"
-                        android:layout_height="59dp"
-                        android:layout_marginBottom="1dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
-                        app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
-                        app:lottie_autoPlay="true"
-                        app:lottie_fileName="micblue.json"
-                        app:lottie_loop="true" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="387dp"
-                android:layout_height="208dp"
-                android:layout_marginTop="40dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/translatedTextCardView"
-                app:layout_constraintHorizontal_bias="0.486"
-                app:layout_constraintStart_toStartOf="@+id/translatedTextCardView"
-                app:layout_constraintTop_toBottomOf="@+id/glossaCardView">
-
-                <ImageView
-                    android:id="@+id/loaded_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_broken_image" />
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/translatedTextCardView"
-                android:layout_width="336dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="-25dp"
-                android:visibility="gone"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="25dp"
-                app:layout_constraintEnd_toEndOf="@+id/glossaCardView"
-                app:layout_constraintStart_toStartOf="@+id/glossaCardView"
-                app:layout_constraintTop_toBottomOf="@+id/glossaCardView">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Spinner
-                        android:id="@+id/sourceLanguageSpinner_2"
-                        android:layout_width="130dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="85dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/targetLanguageSpinner_2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="SpeakableTextPresentCheck" />
-
-                    <Spinner
-                        android:id="@+id/targetLanguageSpinner_2"
-                        android:layout_width="120dp"
-                        android:layout_height="48dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="SpeakableTextPresentCheck" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <ImageView
-                android:id="@+id/close"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_marginTop="20dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3"
-                app:srcCompat="@drawable/ic_close" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
 
+        <ImageView
+            android:id="@+id/ocrImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/voiceButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:backgroundTint="@null"
+            android:elevation="1dp"
+            android:text="voice"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+        <Button
+            android:id="@+id/readItToMeButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:backgroundTint="@null"
+            android:elevation="1dp"
+            android:text="Read It To Me"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/voiceButton" />
+
+        <Button
+            android:id="@+id/galleryButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:backgroundTint="@null"
+            android:elevation="1dp"
+            android:text="Gallery"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/readItToMeButton" />
+
+        <Button
+            android:id="@+id/cameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:backgroundTint="@null"
+            android:elevation="1dp"
+            android:text="Camera"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/galleryButton" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="396dp"
+            android:layout_height="429dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="visible"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:layout_editor_absoluteX="7dp"
+                tools:layout_editor_absoluteY="64dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/speakerAnimation"
+                    android:layout_width="168dp"
+                    android:layout_height="59dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
+                    app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
+                    app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
+                    app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="speaker.json"
+                    app:lottie_loop="true" />
+
+                <Button
+                    android:id="@+id/translateAndStopButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/main"
+                    android:enabled="true"
+                    android:text="Translate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="96dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/sourceLanguageSpinner"
+                    android:layout_width="130dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/divider2"
+                    app:layout_constraintEnd_toEndOf="@+id/divider2"
+                    app:layout_constraintHorizontal_bias="0.054"
+                    app:layout_constraintStart_toStartOf="@+id/divider2"
+                    app:layout_constraintTop_toTopOf="@+id/targetLanguageSpinner"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Spinner
+                    android:id="@+id/targetLanguageSpinner"
+                    android:layout_width="120dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/divider2"
+                    app:layout_constraintEnd_toEndOf="@+id/divider2"
+                    app:layout_constraintHorizontal_bias="0.913"
+                    app:layout_constraintStart_toStartOf="@+id/divider2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation"
+                    android:layout_width="398dp"
+                    android:layout_height="57dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="micblue.json"
+                    app:lottie_loop="true" />
+
+                <ImageView
+                    android:id="@+id/toClipBoard"
+                    android:layout_width="35dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
+                    app:srcCompat="@drawable/clipboards" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/translatedTextLayour_view1"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="202dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/nestedScrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:fillViewport="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+                        <TextView
+                            android:id="@+id/translatedTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="95dp"
+                            android:maxLines="5"
+                            android:text="Translated Text.."
+                            android:textColor="@color/main"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="5dp"
+                            tools:layout_editor_absoluteY="108dp" />
+
+                    </androidx.core.widget.NestedScrollView>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="3dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView2" />
+
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/nestedScrollView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="106dp"
+                        android:fillViewport="true"
+                        app:layout_constraintBottom_toTopOf="@+id/divider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/textPreTranslation"
+                            android:layout_width="match_parent"
+                            android:layout_height="95dp"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:focusable="true"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:text="Your text here.."
+                            android:textSize="18dp"
+                            tools:layout_editor_absoluteX="5dp"
+                            tools:layout_editor_absoluteY="8dp" />
+                    </androidx.core.widget.NestedScrollView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
