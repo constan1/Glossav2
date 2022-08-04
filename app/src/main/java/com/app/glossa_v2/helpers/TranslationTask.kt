@@ -83,7 +83,7 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
     override fun doInBackground(vararg params: String?): String {
         //Instantiate loading
 
-        if(translationModel) {
+        if(translationModel && !params[0].isNullOrEmpty()) {
             ShowTranslation.showProgress(progressDialog, weakContext.get()!!)
             val translateOptions = TranslateOptions.Builder()
                 .addText(params[0])

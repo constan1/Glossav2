@@ -29,6 +29,7 @@ import androidx.core.widget.NestedScrollView
 import com.airbnb.lottie.LottieAnimationView
 import com.app.glossa_v2.helpers.*
 import com.google.android.gms.vision.Frame
+import com.google.android.gms.vision.text.Text
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer
@@ -59,6 +60,8 @@ class TranslatorActivity : AppCompatActivity(){
 
     lateinit var cameraPermission: Array<String>
     lateinit var storagePermission: Array<String>
+
+    lateinit var swappedLanguages:String
 
     private var flag : Boolean = true
 
@@ -261,6 +264,11 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
+        findViewById<ImageView>(R.id.clearText).setOnClickListener {
+
+            findViewById<EditText>(R.id.textPreTranslation).text.clear()
+            findViewById<TextView>(R.id.translatedTextView).text = ""
+        }
 
 
         findViewById<TextView>(R.id.textPreTranslation).addTextChangedListener(object:

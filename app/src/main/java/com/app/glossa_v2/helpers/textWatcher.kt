@@ -4,6 +4,7 @@ import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
+import android.widget.EditText
 import com.app.glossa_v2.R
 import com.app.glossa_v2.TranslatorActivity
 
@@ -19,8 +20,11 @@ abstract class textWatcher(activity: TranslatorActivity): TextWatcher {
     }
 
     override fun afterTextChanged(s: Editable?) {
-        activity_.findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
-        activity_.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+
+        if(!activity_.findViewById<EditText>(R.id.textPreTranslation).text.isEmpty()){
+            activity_.findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
+            activity_.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+        }
     }
 
 }
