@@ -12,17 +12,11 @@ class ShowSpeech(activity: TranslatorActivity, dialog: Dialog) {
 
     private var activity_ = activity
 
-    private lateinit var readItToMe : Button
-
     private var dialog_ = dialog
 
         fun showReadBackUI(){
 
             activity_.runOnUiThread{
-                readItToMe = activity_.findViewById<Button>(R.id.readItToMeButton)
-                readItToMe.isEnabled=false
-                readItToMe.setBackgroundResource(R.color.grey)
-                readItToMe.text = ""
                 dialog_.let {
                     it.show()
                     it.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
@@ -37,10 +31,6 @@ class ShowSpeech(activity: TranslatorActivity, dialog: Dialog) {
         fun hideReadBackUI(){
 
             activity_.runOnUiThread{
-                readItToMe = activity_.findViewById<Button>(R.id.readItToMeButton)
-                readItToMe.isEnabled = true
-                readItToMe.setBackgroundResource(R.color.white)
-                readItToMe.text = "Read It To Me"
                 dialog_.let { if(it.isShowing)it.cancel() }
             }
         }

@@ -98,16 +98,13 @@ class TranslatorActivity : AppCompatActivity(){
                 position: Int,
                 id: Long
             ) {
-
                     val selected: String? =
                         java.lang.String.valueOf(sourceSpinner.adapter.getItem(position))
 
                     if (selected != null) {
                         sourceLanguage = selected
                     }
-
             }
-
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
@@ -119,20 +116,14 @@ class TranslatorActivity : AppCompatActivity(){
                 position: Int,
                 id: Long
             ) {
-
-
                     val selected: String? =
                         java.lang.String.valueOf(targetSpinner.adapter.getItem(position))
                     if (selected != null) {
                         targetLanguage = selected
                     }
-
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-
-
 
         findViewById<Button>(R.id.voiceButton).setOnClickListener {
 
@@ -194,11 +185,15 @@ class TranslatorActivity : AppCompatActivity(){
                     findViewById<EditText>(R.id.textPreTranslation).text.toString()
                 )
                 speechToText_.stopInputStream(microphoneHelper)
+                it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+                it.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
             }
             else {
                 TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
                     findViewById<EditText>(R.id.textPreTranslation).text.toString()
                 )
+                it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+                it.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
             }
 
             findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
@@ -224,8 +219,8 @@ class TranslatorActivity : AppCompatActivity(){
 
         }
 
-        findViewById<Button>(R.id.readItToMeButton).setOnClickListener {
 
+        findViewById<Button>(R.id.speaker_ReadIt).setOnClickListener {
             if(!flag){
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),"You can't do that right now",Snackbar.LENGTH_LONG).show()
             }
@@ -269,7 +264,7 @@ class TranslatorActivity : AppCompatActivity(){
 
 
         findViewById<TextView>(R.id.textPreTranslation).addTextChangedListener(object:
-        textWatcher(){
+        textWatcher(this){
 
         })
     }
