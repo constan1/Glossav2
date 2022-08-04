@@ -201,9 +201,7 @@ class TranslatorActivity : AppCompatActivity(){
 
             findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
             flag = true
-
                 //translate here.
-
         }
 
         findViewById<LottieAnimationView>(R.id.animation).setOnClickListener {
@@ -227,12 +225,15 @@ class TranslatorActivity : AppCompatActivity(){
             if(!flag){
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),"You can't do that right now",Snackbar.LENGTH_LONG).show()
             }
-            else {
+            else if(findViewById<TextView>(R.id.translatedTextView).text.toString().isNotEmpty()) {
                 textService = initTextToSpeechService.initTextToSpeech(this)
                 SynthesisTask(this, targetLanguage, player, textService, speakerDialog!!).execute(
                     findViewById<TextView>(R.id.translatedTextView).text.toString()
                 )
-
+            }
+            else {
+                Snackbar.make(findViewById(R.id.textToBeTranslatedView),"No Text For Playback",
+                    Snackbar.LENGTH_LONG).show()
             }
         }
 

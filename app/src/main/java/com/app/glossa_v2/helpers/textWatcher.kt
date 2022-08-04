@@ -21,7 +21,7 @@ abstract class textWatcher(activity: TranslatorActivity): TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {
 
-        if(!activity_.findViewById<EditText>(R.id.textPreTranslation).text.isEmpty()){
+        if(activity_.findViewById<EditText>(R.id.textPreTranslation).text.isNotEmpty()){
             activity_.findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
             activity_.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
         }

@@ -60,6 +60,9 @@ class SynthesisTask(activity: TranslatorActivity, targetLanguage: String, player
     }
 
     override fun onPostExecute(result: String?) {
-       ShowSpeech(weakContext.get()!!,dialog_).hideReadBackUI()
+        if(result == "Did synthesize") {
+            ShowSpeech(weakContext.get()!!, dialog_).hideReadBackUI()
+        }
+
     }
 }
