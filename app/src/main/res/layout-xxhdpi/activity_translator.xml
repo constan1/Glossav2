@@ -69,8 +69,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
-                android:layout_width="match_parent"
-                android:layout_height="431dp"
+                android:layout_width="406dp"
+                android:layout_height="577dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
@@ -147,7 +147,7 @@
                         android:id="@+id/translatedTextLayour_view1"
                         android:layout_width="match_parent"
 
-                        android:layout_height="213dp"
+                        android:layout_height="350dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="7dp"
@@ -170,8 +170,9 @@
                         <androidx.core.widget.NestedScrollView
                             android:id="@+id/nestedScrollView2"
                             android:layout_width="match_parent"
-                            android:layout_height="105dp"
+                            android:layout_height="175dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="2dp"
                             android:layout_marginBottom="1dp"
                             android:fillViewport="true"
                             app:layout_constraintBottom_toTopOf="@+id/divider"
@@ -208,7 +209,7 @@
                         <androidx.core.widget.NestedScrollView
                             android:id="@+id/nestedScrollView"
                             android:layout_width="match_parent"
-                            android:layout_height="105dp"
+                            android:layout_height="175dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="1dp"
@@ -246,18 +247,18 @@
                         android:id="@+id/clearText"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
-                        app:layout_constraintEnd_toStartOf="@+id/toClipBoard"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginEnd="45dp"
+                        app:layout_constraintEnd_toEndOf="@+id/toClipBoard"
                         app:layout_constraintStart_toStartOf="@+id/switchLanguages"
+                        app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1"
                         app:srcCompat="@drawable/ic_clear" />
 
                     <ImageView
                         android:id="@+id/toClipBoard"
                         android:layout_width="37dp"
                         android:layout_height="41dp"
-                        android:layout_marginStart="7dp"
+                        android:layout_marginStart="2dp"
                         app:layout_constraintBottom_toBottomOf="@+id/clearText"
                         app:layout_constraintEnd_toEndOf="@+id/switchLanguages"
                         app:layout_constraintStart_toEndOf="@+id/clearText"
@@ -268,16 +269,14 @@
                         android:id="@+id/translateAndStopButton"
                         android:layout_width="match_parent"
                         android:layout_height="54dp"
-                        android:layout_marginTop="64dp"
                         android:background="@color/grey"
                         android:enabled="false"
                         android:text="Translate"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintHorizontal_bias="0.416"
-                        app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/animation"
@@ -300,14 +299,15 @@
                 android:id="@+id/record_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="22dp"
                 android:background="@color/white"
                 android:backgroundTint="@null"
                 android:text="Record"
                 android:textColor="@color/main"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView3"
+                tools:layout_editor_absoluteX="26dp" />
 
             <Button
                 android:id="@+id/speak_back_button"

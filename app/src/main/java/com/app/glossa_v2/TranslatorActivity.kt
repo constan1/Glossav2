@@ -39,6 +39,12 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.lang.Exception
 import java.lang.StringBuilder
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+
+
+
 
 
 class TranslatorActivity : AppCompatActivity(){
@@ -60,8 +66,6 @@ class TranslatorActivity : AppCompatActivity(){
 
     lateinit var cameraPermission: Array<String>
     lateinit var storagePermission: Array<String>
-
-    lateinit var swappedLanguages:String
 
     private var flag : Boolean = true
 
@@ -107,6 +111,11 @@ class TranslatorActivity : AppCompatActivity(){
                     if (selected != null) {
                         sourceLanguage = selected
                     }
+
+               if(!findViewById<Button>(R.id.translateAndStopButton).isEnabled && !findViewById<EditText>(R.id.textPreTranslation).text.isNullOrEmpty()){
+                   findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
+                   findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+               }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -124,11 +133,15 @@ class TranslatorActivity : AppCompatActivity(){
                     if (selected != null) {
                         targetLanguage = selected
                     }
+                if(!findViewById<Button>(R.id.translateAndStopButton).isEnabled && !findViewById<EditText>(R.id.textPreTranslation).text.isNullOrEmpty()){
+                    findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
+                    findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+                }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        findViewById<Button>(R.id.voiceButton).setOnClickListener {
+        findViewById<Button>(R.id.record_button).setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
                 // Requesting the permission
@@ -144,6 +157,9 @@ class TranslatorActivity : AppCompatActivity(){
                     microphoneHelper = MicrophoneHelper(this)
                     capture = microphoneHelper.getInputStream(true)
                     speechService = speechToText_.setUp(this)
+
+                    findViewById<ImageView>(R.id.clearText).visibility = View.GONE
+                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.GONE
 
                     speechToText_.startInputStream(
                         this,
@@ -173,40 +189,60 @@ class TranslatorActivity : AppCompatActivity(){
 
         }
 
-        findViewById<LottieAnimationView>(R.id.animation).setOnClickListener {
-            speechToText_.stopInputStream(microphoneHelper)
-            it.visibility = View.GONE
-
-
-        }
-
         findViewById<Button>(R.id.translateAndStopButton).setOnClickListener {
 
             if(!flag) {
 
-                TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
-                    findViewById<EditText>(R.id.textPreTranslation).text.toString()
-                )
-                speechToText_.stopInputStream(microphoneHelper)
-                it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
-                it.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
+                if(sourceLanguage != targetLanguage) {
+
+
+                    TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
+                        findViewById<EditText>(R.id.textPreTranslation).text.toString()
+                    )
+                    speechToText_.stopInputStream(microphoneHelper)
+                    it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+                    it.findViewById<Button>(R.id.translateAndStopButton)
+                        .setBackgroundResource(R.color.grey)
+                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
+                    findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
+                    findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
+                    flag = true
+                }
+                else{
+                    Snackbar.make(findViewById(R.id.textToBeTranslatedView),"Source language and target language cannot be the same",Snackbar.LENGTH_LONG).show()
+                }
             }
             else {
-                TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
-                    findViewById<EditText>(R.id.textPreTranslation).text.toString()
-                )
-                it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
-                it.findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.grey)
+                if (sourceLanguage != targetLanguage) {
+
+
+                    TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
+                        findViewById<EditText>(R.id.textPreTranslation).text.toString()
+                    )
+                    it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
+                    it.findViewById<Button>(R.id.translateAndStopButton)
+                        .setBackgroundResource(R.color.grey)
+
+
+                    findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
+                    flag = true
+                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
+                    findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
+                }
+                else {
+                    Snackbar.make(findViewById(R.id.textToBeTranslatedView),"Source language and target language cannot be the same",Snackbar.LENGTH_LONG).show()
+
+                }
             }
 
-            findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
-            flag = true
                 //translate here.
         }
 
         findViewById<LottieAnimationView>(R.id.animation).setOnClickListener {
             speechToText_.stopInputStream(microphoneHelper)
             it.visibility = View.GONE
+            findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
+            findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
             flag = true
         }
 
@@ -221,7 +257,7 @@ class TranslatorActivity : AppCompatActivity(){
         }
 
 
-        findViewById<Button>(R.id.speaker_ReadIt).setOnClickListener {
+        findViewById<Button>(R.id.speak_back_button).setOnClickListener {
             if(!flag){
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),"You can't do that right now",Snackbar.LENGTH_LONG).show()
             }
@@ -237,7 +273,7 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
-        findViewById<Button>(R.id.galleryButton).setOnClickListener {
+        findViewById<Button>(R.id.gallery_button).setOnClickListener {
 
             if(!flag){
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),"Can't Do this while translation in progress",Snackbar.LENGTH_LONG).show()
@@ -251,7 +287,7 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
-        findViewById<Button>(R.id.cameraButton).setOnClickListener {
+        findViewById<Button>(R.id.camera_button).setOnClickListener {
 
             if(!flag){
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),"Can't do this while translation in progress",Snackbar.LENGTH_LONG).show()

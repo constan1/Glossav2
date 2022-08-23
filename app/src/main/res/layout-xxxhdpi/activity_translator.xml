@@ -70,7 +70,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
-                android:layout_height="431dp"
+                android:layout_height="562dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
@@ -145,9 +145,9 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/translatedTextLayour_view1"
-                        android:layout_width="match_parent"
+                        android:layout_width="402dp"
 
-                        android:layout_height="213dp"
+                        android:layout_height="321dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="7dp"
@@ -160,7 +160,8 @@
                             android:id="@+id/divider"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="1dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="4dp"
                             android:background="?android:attr/listDivider"
                             app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -170,9 +171,11 @@
                         <androidx.core.widget.NestedScrollView
                             android:id="@+id/nestedScrollView2"
                             android:layout_width="match_parent"
-                            android:layout_height="105dp"
+                            android:layout_height="142dp"
                             android:layout_marginStart="10dp"
-                            android:layout_marginBottom="1dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="6dp"
                             android:fillViewport="true"
                             app:layout_constraintBottom_toTopOf="@+id/divider"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -208,15 +211,16 @@
                         <androidx.core.widget.NestedScrollView
                             android:id="@+id/nestedScrollView"
                             android:layout_width="match_parent"
-                            android:layout_height="105dp"
+                            android:layout_height="157dp"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="2dp"
                             android:fillViewport="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView2">
+                            app:layout_constraintTop_toBottomOf="@+id/divider">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -246,10 +250,10 @@
                         android:id="@+id/clearText"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="60dp"
+                        android:layout_marginBottom="11dp"
                         app:layout_constraintBottom_toTopOf="@+id/translateAndStopButton"
-                        app:layout_constraintEnd_toStartOf="@+id/toClipBoard"
+                        app:layout_constraintEnd_toEndOf="@+id/toClipBoard"
                         app:layout_constraintStart_toStartOf="@+id/switchLanguages"
                         app:srcCompat="@drawable/ic_clear" />
 
@@ -259,7 +263,6 @@
                         android:layout_height="41dp"
                         android:layout_marginStart="7dp"
                         app:layout_constraintBottom_toBottomOf="@+id/clearText"
-                        app:layout_constraintEnd_toEndOf="@+id/switchLanguages"
                         app:layout_constraintStart_toEndOf="@+id/clearText"
                         app:layout_constraintTop_toTopOf="@+id/clearText"
                         app:srcCompat="@drawable/ic_copy" />
@@ -268,15 +271,14 @@
                         android:id="@+id/translateAndStopButton"
                         android:layout_width="match_parent"
                         android:layout_height="54dp"
-                        android:layout_marginTop="64dp"
+                        android:layout_marginTop="83dp"
                         android:background="@color/grey"
                         android:enabled="false"
                         android:text="Translate"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        app:layout_constraintEnd_toEndOf="@+id/translatedTextLayour_view1"
-                        app:layout_constraintHorizontal_bias="0.416"
-                        app:layout_constraintStart_toStartOf="@+id/translatedTextLayour_view1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/translatedTextLayour_view1" />
 
                     <com.airbnb.lottie.LottieAnimationView
@@ -300,14 +302,15 @@
                 android:id="@+id/record_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="48dp"
                 android:background="@color/white"
                 android:backgroundTint="@null"
                 android:text="Record"
                 android:textColor="@color/main"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView3"
+                tools:layout_editor_absoluteX="16dp" />
 
             <Button
                 android:id="@+id/speak_back_button"
