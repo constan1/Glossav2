@@ -1,11 +1,10 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.TextToSpeech
 
 import android.app.Dialog
 import android.graphics.Color
-import android.widget.Button
 import androidx.core.graphics.drawable.toDrawable
 import com.app.glossa_v2.R
-import com.app.glossa_v2.TranslatorActivity
+import com.app.glossa_v2.ui.TranslatorActivity
 import com.google.android.material.snackbar.Snackbar
 
 class ShowSpeech(activity: TranslatorActivity, dialog: Dialog) {
@@ -37,7 +36,7 @@ class ShowSpeech(activity: TranslatorActivity, dialog: Dialog) {
 
     fun showError(){
         activity_.runOnUiThread{
-            Snackbar.make(activity_.findViewById(R.id.textToBeTranslatedView)," Language Not Supported For Read Back At This Time",
+            Snackbar.make(activity_.findViewById(R.id.textToBeTranslatedView),activity_.getString(R.string.language_not_supported_for_readback),
                 Snackbar.LENGTH_LONG).show()
         }
     }

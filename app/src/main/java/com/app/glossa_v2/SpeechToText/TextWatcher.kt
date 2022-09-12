@@ -1,12 +1,11 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.SpeechToText
 
-import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import com.app.glossa_v2.R
-import com.app.glossa_v2.TranslatorActivity
+import com.app.glossa_v2.ui.TranslatorActivity
 
 abstract class textWatcher(activity: TranslatorActivity): TextWatcher {
 

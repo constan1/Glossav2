@@ -1,17 +1,11 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.TranslationModel
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.isVisible
 import com.app.glossa_v2.R
-import com.google.android.material.snackbar.Snackbar
-import org.w3c.dom.Text
 
 class ShowTranslation {
 

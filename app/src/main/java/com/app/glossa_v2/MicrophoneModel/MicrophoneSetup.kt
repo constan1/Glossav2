@@ -1,8 +1,8 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.MicrophoneModel
 
 import android.widget.TextView
 import com.app.glossa_v2.R
-import com.app.glossa_v2.TranslatorActivity
+import com.app.glossa_v2.ui.TranslatorActivity
 import com.google.android.material.snackbar.Snackbar
 import com.ibm.watson.speech_to_text.v1.model.SpeechRecognitionResults
 import com.ibm.watson.speech_to_text.v1.websocket.BaseRecognizeCallback
@@ -11,11 +11,11 @@ import java.lang.Exception
 import java.lang.RuntimeException
 
 
-class MicrophoneSetup(activity: TranslatorActivity,inputText:TextView): BaseRecognizeCallback(), RecognizeCallback {
+class MicrophoneSetup(activity: TranslatorActivity, inputText:TextView): BaseRecognizeCallback(), RecognizeCallback {
 
-    var activity_ = activity
+    private var activity_ = activity
 
-    var input_ = inputText
+    private var input_ = inputText
 
 
 
@@ -31,7 +31,7 @@ class MicrophoneSetup(activity: TranslatorActivity,inputText:TextView): BaseReco
         activity_.runOnUiThread {   /*
         As text changes it will appear in a dialog
         **/
-            Snackbar.make(activity_.findViewById(R.id.textToBeTranslatedView),"Recording Stopped!",Snackbar.LENGTH_LONG).show()
+            Snackbar.make(activity_.findViewById(R.id.textToBeTranslatedView),activity_.getString(R.string.recording_stopped),Snackbar.LENGTH_LONG).show()
             //show
         }
     }

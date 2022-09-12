@@ -1,11 +1,11 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.TextToSpeech
 
 import android.app.Dialog
 import android.os.AsyncTask
-import com.app.glossa_v2.TranslatorActivity
+import com.app.glossa_v2.R
+import com.app.glossa_v2.ui.TranslatorActivity
 import com.ibm.cloud.sdk.core.http.HttpMediaType
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer
-import com.ibm.watson.language_translator.v3.util.Language
 import com.ibm.watson.text_to_speech.v1.TextToSpeech
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions
 import java.lang.ref.WeakReference
@@ -45,7 +45,7 @@ class SynthesisTask(activity: TranslatorActivity, targetLanguage: String, player
 
             ShowSpeech(weakContext.get()!!,dialog_).showError()
 
-            return "Not Synthesized"
+            return weakContext.get()!!.getString(R.string.not_synthesized)
         } else {
             ShowSpeech(weakContext.get()!!,dialog_).showReadBackUI()
             val synthesizeOptions = SynthesizeOptions.Builder()
@@ -55,12 +55,12 @@ class SynthesisTask(activity: TranslatorActivity, targetLanguage: String, player
                 .build()
             player_.playStream(textService_.synthesize(synthesizeOptions).execute().result)
             //show animation.
-            return "Did synthesize"
+            return weakContext.get()!!.getString(R.string.synthesized)
         }
     }
 
     override fun onPostExecute(result: String?) {
-        if(result == "Did synthesize") {
+        if(result == weakContext.get()!!.getString(R.string.synthesized)) {
             ShowSpeech(weakContext.get()!!, dialog_).hideReadBackUI()
         }
 

@@ -1,4 +1,4 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.TranslationModel
 
 import android.content.Context
 import com.app.glossa_v2.R

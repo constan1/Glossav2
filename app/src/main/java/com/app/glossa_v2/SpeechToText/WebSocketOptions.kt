@@ -1,4 +1,4 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.SpeechToText
 
 import com.ibm.watson.developer_cloud.android.library.audio.utils.ContentType
 import com.ibm.watson.speech_to_text.v1.model.RecognizeOptions

@@ -1,9 +1,9 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.TranslationModel
 
 import android.app.Dialog
 import android.os.AsyncTask
 import com.app.glossa_v2.R
-import com.app.glossa_v2.TranslatorActivity
+import com.app.glossa_v2.ui.TranslatorActivity
 import com.ibm.watson.language_translator.v3.LanguageTranslator
 import com.ibm.watson.language_translator.v3.model.TranslateOptions
 import com.ibm.watson.language_translator.v3.model.TranslationResult
@@ -97,14 +97,14 @@ class TranslationTask(activity: TranslatorActivity, srcLanguage: String, targetL
 
             return translatedText
         }
-        translatedText = "false"
+        translatedText = weakContext.get()!!.getString(R.string.translated_text_false)
         return translatedText
 
     }
 
     override fun onPostExecute(result: String?) {
 
-        if(translatedText == "false"){
+        if(translatedText == weakContext.get()!!.getString(R.string.translated_text_false)){
             ShowTranslation.showTranslationError(weakContext.get()!!)
         }
         else {

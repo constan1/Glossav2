@@ -1,4 +1,4 @@
-package com.app.glossa_v2.helpers
+package com.app.glossa_v2.SpeechToText
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
