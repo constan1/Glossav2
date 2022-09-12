@@ -41,6 +41,13 @@ class TranslatorActivity : AppCompatActivity(){
     private var translationServiceImpl: TranslationServiceClass = ServiceImpl()
     private var ocrServiceImageButton : OcrServiceClass = OcrServiceImpl()
 
+    private lateinit var copyBoard : ImageView
+    private lateinit var clearText : ImageView
+    private lateinit var animation: LottieAnimationView
+    private lateinit var ocrImage: ImageView
+
+
+
     private lateinit var sourceLanguage : String
     private lateinit var targetLanguage : String
     private var loading : Dialog? = null
@@ -53,7 +60,7 @@ class TranslatorActivity : AppCompatActivity(){
 
     private var image_uri: Uri? = null
 
-    lateinit var bitmap: Bitmap
+    private lateinit var bitmap: Bitmap
 
 
 
@@ -75,6 +82,26 @@ class TranslatorActivity : AppCompatActivity(){
         val sourceSpinner: Spinner = findViewById(R.id.sourceLanguageSpinner)
         val targetSpinner: Spinner = findViewById(R.id.targetLanguageSpinner)
 
+
+        val recordButton = findViewById<Button>(R.id.record_button)
+        val speakBackButton = findViewById<Button>(R.id.speak_back_button)
+        val galleryButton = findViewById<Button>(R.id.gallery_button)
+        val cameraButton = findViewById<Button>(R.id.camera_button)
+
+
+
+        val text_preTranslate = findViewById<EditText>(R.id.textPreTranslation)
+        val text_postTranslate = findViewById<TextView>(R.id.translatedTextView)
+
+        ocrImage = findViewById(R.id.ocrImage)
+
+         copyBoard = findViewById(R.id.toClipBoard)
+        clearText = findViewById(R.id.clearText)
+        animation = findViewById(R.id.animation)
+
+        val translateButton = findViewById<Button>(R.id.translateAndStopButton)
+
+
         translationServiceImpl.initiateSpinners(this,sourceSpinner,targetSpinner)
 
         sourceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -91,11 +118,9 @@ class TranslatorActivity : AppCompatActivity(){
                         sourceLanguage = selected
                     }
 
-               if(!findViewById<Button>(R.id.translateAndStopButton).isEnabled && !findViewById<EditText>(
-                       R.id.textPreTranslation
-                   ).text.isNullOrEmpty()){
-                   findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
-                   findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+               if(!text_preTranslate.isEnabled && !text_preTranslate.text.isNullOrEmpty()){
+                  translateButton.isEnabled = true
+                   translateButton.setBackgroundResource(R.color.main)
                }
             }
 
@@ -114,30 +139,30 @@ class TranslatorActivity : AppCompatActivity(){
                     if (selected != null) {
                         targetLanguage = selected
                     }
-                if(!findViewById<Button>(R.id.translateAndStopButton).isEnabled && !findViewById<EditText>(
+                if(!translateButton.isEnabled && !findViewById<EditText>(
                         R.id.textPreTranslation
                     ).text.isNullOrEmpty()){
-                    findViewById<Button>(R.id.translateAndStopButton).isEnabled = true
-                    findViewById<Button>(R.id.translateAndStopButton).setBackgroundResource(R.color.main)
+                    translateButton.isEnabled = true
+                    translateButton.setBackgroundResource(R.color.main)
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        findViewById<Button>(R.id.record_button).setOnClickListener {
+        recordButton.setOnClickListener {
 
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
                 // Requesting the permission
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.RECORD_AUDIO), MicrophoneHelper.REQUEST_PERMISSION)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), MicrophoneHelper.REQUEST_PERMISSION)
 
 
             } else {
                 if(flag) {
 
-                    translationServiceImpl.record(this,sourceLanguage,targetLanguage,findViewById(R.id.textPreTranslation))
-                    findViewById<ImageView>(R.id.clearText).visibility = View.GONE
-                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.GONE
-                    findViewById<LottieAnimationView>(R.id.animation).visibility = View.VISIBLE
+                    translationServiceImpl.record(this,sourceLanguage,targetLanguage,text_preTranslate)
+                   clearText.visibility = View.GONE
+                   copyBoard.visibility = View.GONE
+                    animation.visibility = View.VISIBLE
 
 
                     flag = false
@@ -154,20 +179,19 @@ class TranslatorActivity : AppCompatActivity(){
 
         }
 
-        findViewById<Button>(R.id.translateAndStopButton).setOnClickListener {
+        translateButton.setOnClickListener {
 
             if(!flag) {
 
                 if(sourceLanguage != targetLanguage) {
 
-                    translationServiceImpl.translateAndStop(this,findViewById(R.id.textPreTranslation),sourceLanguage,targetLanguage,loading)
+                    translationServiceImpl.translateAndStop(this,text_preTranslate,sourceLanguage,targetLanguage,loading)
 
-                    it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
-                    it.findViewById<Button>(R.id.translateAndStopButton)
-                        .setBackgroundResource(R.color.grey)
-                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
-                    findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
-                    findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
+                    it.isEnabled = false
+                    it.setBackgroundResource(R.color.grey)
+                    copyBoard.visibility = View.VISIBLE
+                    clearText.visibility = View.VISIBLE
+                    animation.visibility = View.GONE
                     flag = true
                 }
                 else{
@@ -179,17 +203,16 @@ class TranslatorActivity : AppCompatActivity(){
 
 
                     TranslationTask(this, sourceLanguage, targetLanguage, loading!!).execute(
-                        findViewById<EditText>(R.id.textPreTranslation).text.toString()
+                        text_preTranslate.text.toString()
                     )
-                    it.findViewById<Button>(R.id.translateAndStopButton).isEnabled = false
-                    it.findViewById<Button>(R.id.translateAndStopButton)
-                        .setBackgroundResource(R.color.grey)
+                    it.isEnabled = false
+                    it.setBackgroundResource(R.color.grey)
 
 
-                    findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
+                    animation.visibility = View.GONE
                     flag = true
-                    findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
-                    findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
+                    copyBoard.visibility = View.VISIBLE
+                    clearText.visibility = View.VISIBLE
                 }
                 else {
                     Snackbar.make(findViewById(R.id.textToBeTranslatedView),getString(R.string.sourceLanguage_targetLanguage),Snackbar.LENGTH_LONG).show()
@@ -201,9 +224,9 @@ class TranslatorActivity : AppCompatActivity(){
 
 
 
-        findViewById<ImageView>(R.id.toClipBoard).setOnClickListener {
+        copyBoard.setOnClickListener {
 
-                val clip = ClipData.newPlainText(getString(R.string.copyLabel), findViewById<TextView>(R.id.translatedTextView).text)
+                val clip = ClipData.newPlainText(getString(R.string.copyLabel), text_postTranslate.text)
                 clipboard.setPrimaryClip(clip)
 
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),getString(R.string.copyBody),Snackbar.LENGTH_LONG).show()
@@ -211,14 +234,14 @@ class TranslatorActivity : AppCompatActivity(){
         }
 
 
-        findViewById<Button>(R.id.speak_back_button).setOnClickListener {
+        speakBackButton.setOnClickListener {
             if(!flag){
                 //stop recording
                 stopRecordingUI()
             }
-            else if(findViewById<TextView>(R.id.translatedTextView).text.toString().isNotEmpty()) {
+            else if(text_postTranslate.text.toString().isNotEmpty()) {
 
-                translationServiceImpl.textToSpeech(this,findViewById(R.id.translatedTextView),sourceLanguage,targetLanguage, speakerDialog)
+                translationServiceImpl.textToSpeech(this,text_postTranslate,sourceLanguage,targetLanguage, speakerDialog)
             }
             else {
                 Snackbar.make(findViewById(R.id.textToBeTranslatedView),getString(R.string.no_text_for_playback),
@@ -226,7 +249,7 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
-        findViewById<Button>(R.id.gallery_button).setOnClickListener {
+        galleryButton.setOnClickListener {
 
             if(!flag){
                 //stop recording
@@ -241,7 +264,7 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
-        findViewById<Button>(R.id.camera_button).setOnClickListener {
+        cameraButton.setOnClickListener {
 
             if(!flag){
                 //stop recording
@@ -256,14 +279,14 @@ class TranslatorActivity : AppCompatActivity(){
             }
         }
 
-        findViewById<ImageView>(R.id.clearText).setOnClickListener {
+        clearText.setOnClickListener {
 
-            findViewById<EditText>(R.id.textPreTranslation).text.clear()
-            findViewById<TextView>(R.id.translatedTextView).text = getString(R.string.cleared_text)
+            text_preTranslate.text.clear()
+            text_postTranslate.text = getString(R.string.cleared_text)
         }
 
 
-        findViewById<TextView>(R.id.textPreTranslation).addTextChangedListener(object:
+        text_preTranslate.addTextChangedListener(object:
         textWatcher(this){
 
         })
@@ -296,19 +319,19 @@ class TranslatorActivity : AppCompatActivity(){
     }
 
     private fun pickGallery(){
-        val intent: Intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type =getString(R.string.imageType)
         startActivityForResult(intent,PermissionCodes.IMAGE_PICK_GALLERY_CODE)
 
     }
 
     private fun pickCamera(){
-        val values : ContentValues = ContentValues()
+        val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, getString(R.string.doc))
         values.put(MediaStore.Images.Media.DESCRIPTION, getString(R.string.ocr_text))
         image_uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
-        val camera : Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val camera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         camera.putExtra(MediaStore.EXTRA_OUTPUT,image_uri)
         startActivityForResult(camera,PermissionCodes.IMAGE_PICK_CAMERA_CODE)
     }
@@ -367,9 +390,9 @@ class TranslatorActivity : AppCompatActivity(){
 
             if(resultCode == RESULT_OK){
                 val resultUri  : Uri = result.uri
-                findViewById<ImageView>(R.id.ocrImage).setImageURI(resultUri)
+                ocrImage.setImageURI(resultUri)
 
-                val bitmapDrawable = findViewById<ImageView>(R.id.ocrImage).drawable
+                val bitmapDrawable = ocrImage.drawable
 
                 bitmap = bitmapDrawable.toBitmap()
 
@@ -380,7 +403,7 @@ class TranslatorActivity : AppCompatActivity(){
 
             else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 val error: Exception = result.error
-                Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show()
             }
 
             else {
@@ -397,9 +420,9 @@ class TranslatorActivity : AppCompatActivity(){
 
     private fun stopRecordingUI(){
         translationServiceImpl.stopRecording()
-        findViewById<ImageView>(R.id.toClipBoard).visibility = View.VISIBLE
-        findViewById<ImageView>(R.id.clearText).visibility = View.VISIBLE
-        findViewById<LottieAnimationView>(R.id.animation).visibility = View.GONE
+         copyBoard.visibility = View.VISIBLE
+        clearText.visibility = View.VISIBLE
+        animation.visibility = View.GONE
         flag = true
     }
 }

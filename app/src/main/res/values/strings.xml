@@ -18,6 +18,15 @@
     <string name= "ocr_text">OcrText</string>
     <string name= "permission_denied">Permission Denied</string>
     <string name= "no_data">No Data</string>
+    <string name="glosa">Glosa</string>
+    <string name="enter">Enter</string>
+    <string name="translated_text_here">Translated Text Here..</string>
+    <string name="translate">Translate</string>
+    <string name="record">Record</string>
+    <string name="read">Read</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="the_text_body_is_empty_or_this_language_model_is_not_supported_as_of_now">The text body is empty or this Language Model Is Not Supported As Of Now</string>
     <string-array name="languages_spinner1">
         <item>English</item>
         <item>German</item>
