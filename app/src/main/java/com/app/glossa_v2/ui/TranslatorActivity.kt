@@ -51,7 +51,7 @@ class TranslatorActivity : AppCompatActivity(){
     private lateinit var sourceLanguage : String
     private lateinit var targetLanguage : String
     private var loading : Dialog? = null
-    private var speakerDialog: Dialog? = null
+     var speakerDialog: Dialog? = null
 
     private lateinit var cameraPermission: Array<String>
     private lateinit var storagePermission: Array<String>
